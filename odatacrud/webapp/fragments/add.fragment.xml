@@ -1,0 +1,25 @@
+<core:FragmentDefinition xmlns:form="sap.ui.layout.form"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Dialog id="createDialog" title="create">
+        <form:SimpleForm backgroundDesign="Transparent">
+            <Label text="Userid"/>
+            <Input value="" id="Userid" liveChange="liveChangeFirstname"/>
+            <Label text="Username"/>
+            <Input value="" id="Username" liveChange="liveChangeLastname"/>
+            <Label text="Useremail"/>
+            <Input value="" id="Useremail" liveChange="liveChangeEmail"/>
+            <Label text="Userpass"/>
+            <Input value="" id="Userpass" liveChange="liveChangePassword"/>
+            <Label text="Userdesign"/>
+            <Input value="" id="Userdesign" liveChange="liveChangePassword"/>
+          
+        </form:SimpleForm>
+        <beginButton>
+            <Button text="Close" press=".onCloseDialog"/>
+        </beginButton>
+        <endButton>
+            <Button text="Add" press=".onAddDetails"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

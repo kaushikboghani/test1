@@ -1,0 +1,82 @@
+{
+    "products": [
+        {
+            "productId": "P00001",
+            "name": "Organic Apple",
+            "category": "Fresh Produce",
+            "price": 4.00,
+            "totalPrice": 4.00,
+            "offer": "100% off",
+            "image": "Images/OrganicApples.jpg",
+            "rating": 4.8,
+            "reviews": 150,
+            "inStock": true,
+            "visible": true
+        },
+        {
+            "productId": "P00002",
+            "name": "SS Cookware Set",
+            "category": "Kitchen & Dining",
+            "price": 80.00,
+            "totalPrice": 80.00,
+            "offer": "15% off",
+            "image": "Images/StainlessSteelCookwareSet.jpg",
+            "rating": 4.5,
+            "reviews": 120,
+            "inStock": true,
+            "visible": true
+        },
+        {
+            "productId": "P00003",
+            "name": "Baby Diapers",
+            "category": "Baby Care",
+            "price": 26.00,
+            "totalPrice": 26.00,
+            "offer": "5% off",
+            "image": "Images/BabyDiapers.jpg",
+            "rating": 4.7,
+            "reviews": 200,
+            "inStock": true,
+            "visible": true
+        },
+        {
+            "productId": "P00004",
+            "name": "All-Purpose Cleaner",
+            "category": "Cleaning Supplies",
+            "price": 6.00,
+            "totalPrice": 6.00,
+            "offer": "10% off",
+            "image": "Images/All-PurposeCleaner.jpg",
+            "rating": 4.6,
+            "reviews": 180,
+            "inStock": true,
+            "visible": true
+        },
+        {
+            "productId": "P00005",
+            "name": "Organic Bananas",
+            "category": "Fresh Produce",
+            "price": 2.00,
+            "totalPrice": 2.00,
+            "offer": "5% off",
+            "image": "Images/OrganicBananas.jpg",
+            "rating": 4.9,
+            "reviews": 300,
+            "inStock": true,
+            "visible": true
+        },
+        {
+            "productId": "P00006",
+            "name": "Dinner Plate Set",
+            "category": "Kitchen & Dining",
+            "price": 46.00,
+            "totalPrice": 46.00,
+            "offer": "20% off",
+            "image": "Images/DinnerPlateSet.jpg",
+            "rating": 4.3,
+            "reviews": 80,
+            "inStock": true,
+            "visible": true
+        }
+    ]
+}

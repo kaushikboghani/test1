@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZAJ_LAUNCHPAD_DAFF_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="ZLAUNCHAPPINFO" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Lappid"/>
+                </Key>
+                <Property Name="Lappid" Type="Edm.String" Nullable="false" MaxLength="5" sap:unicode="false" sap:label="APP ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lappname" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="App Name" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lappdesc" Type="Edm.String" Nullable="false" MaxLength="35" sap:unicode="false" sap:label="App Desc" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lapplink" Type="Edm.String" Nullable="false" MaxLength="25" sap:unicode="false" sap:label="app link" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lappimg" Type="Edm.String" Nullable="false" MaxLength="799999" sap:unicode="false" sap:label="app image" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lapppin" Type="Edm.Boolean" Nullable="false" sap:unicode="false" sap:label="Boolean" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Luserid" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="USER ID" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lsmantic" Type="Edm.String" Nullable="false" MaxLength="100" sap:unicode="false" sap:label="smantic" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Laction" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="action" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Lparam" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="Parameter" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ZLAUNCHUSERINFO" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Userid"/>
+                </Key>
+                <Property Name="Userid" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="USER ID" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Username" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="User Name" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Useremail" Type="Edm.String" Nullable="false" MaxLength="30" sap:unicode="false" sap:label="User Name" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Userpass" Type="Edm.String" Nullable="false" MaxLength="50" sap:unicode="false" sap:label="Launchpad user password" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Userdesign" Type="Edm.Byte" Nullable="false" sap:unicode="false" sap:label="launchpad user design template" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZAJ_LAUNCHPAD_DAFF_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZLAUNCHAPPINFOSet" EntityType="ZAJ_LAUNCHPAD_DAFF_SRV.ZLAUNCHAPPINFO" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ZLAUNCHUSERINFOSet" EntityType="ZAJ_LAUNCHPAD_DAFF_SRV.ZLAUNCHUSERINFO" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <atom:link rel="self" href="http://kaushik.com:8090/sap/opu/odata/sap/ZAJ_LAUNCHPAD_DAFF_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://kaushik.com:8090/sap/opu/odata/sap/ZAJ_LAUNCHPAD_DAFF_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

@@ -1,0 +1,185 @@
+<mvc:View xmlns:cards="sap.f.cards"
+  xmlns:core="sap.ui.core"
+  xmlns:uxap="sap.uxap"
+  xmlns:form="sap.ui.layout.form"
+  xmlns:f="sap.f" controllerName="grocerhub.controller.View2"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:l="sap.ui.layout"
+  xmlns="sap.m">
+  <Page id="page2" title="checkout" floatingFooter="true">
+
+    <headerContent>
+      <Button text="Return To Shop" press="onGoPage1" type="Emphasized"></Button>
+    </headerContent>
+
+    <content>
+      <Wizard complete="oncompletedwizardsteps"  navigationChange="onNavigationChange"  height="100%" id="CreateProductWizard" renderMode="Page" showNextButton="false">
+        <WizardStep title="Items" icon="sap-icon://activity-items" id="ItemsStep">
+                  <form:SimpleForm editable="false" layout="ResponsiveGridLayout" id="SimpleFormDisplay480_12120" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="true">
+            <form:content>
+            <!-- <Button type="Accept"></Button> -->
+              <List id="listidcartdata" items="{cartDataList>/}">
+
+
+                <ObjectListItem title="{cartDataList>name}" icon="{cartDataList>Carouselimage}" type="Active" press="onListItemPress" number="{cartDataList>finalPrice}" numberUnit="USD" intro="{cartDataList>quantity} x">
+                  <firstStatus>
+                    <ObjectStatus text="Available" state="Success" />
+                  </firstStatus>
+                  <ObjectAttribute text="{cartDataList>category}" />
+                  <ObjectAttribute text="{cartDataList>description}" />
+                </ObjectListItem>
+
+              </List>
+
+            </form:content>
+          </form:SimpleForm>
+        </WizardStep>
+
+
+        <WizardStep title="Payment Type" >
+          <Panel >
+            <form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+              <form:content>
+                <l:VerticalLayout>
+
+                  <Text text="We accept all major credit cards with no additional charging. Bank transfer and cash on delivery are only possible for inland deliveries. For those, we will charge additional 2.99 EUR. Orders payed with bank transfer, will be shipped direcly after the payment is received."></Text>
+                  <!-- <HBox justifyContent="Center"> -->
+                    <SegmentedButton selectedKey="competitor" id="SegmentedButton"  class="sapUiMediumMarginTop" selectionChange="onPaymentMethodSelect">
+                      <items>
+                        <SegmentedButtonItem icon="sap-icon://wallet" key="Cash" text="Cash" />
+                        <SegmentedButtonItem icon="sap-icon://credit-card" text="Bank Transfer" key="BankTransfer"/>
+                        <SegmentedButtonItem icon="sap-icon://credit-card" text="Credit Card" key="CreditCard"/>
+                        <SegmentedButtonItem icon="sap-icon://shipping-status" text="Cash On delivery" key="CashOndelivery" />
+                      </items>
+                    </SegmentedButton>
+                  <!-- </HBox> -->
+                </l:VerticalLayout>
+              </form:content>
+            </form:SimpleForm>
+          </Panel>
+
+          <!-- <Panel >
+            <content> -->
+              <form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" visible="true" id="cashFields">
+                <form:content>
+                  <core:Title text="Cash Payment" />
+                  
+                  <Label text="Confirm Cash Amount" design="Bold" class="sapUiTinyMarginTop"/>
+                  <Input id="cashAmount" placeholder="Enter the amount" value="{SummaryOfShopping>/GrandTotal} USD" editable="false"/>
+                </form:content>
+              </form:SimpleForm>
+
+              <!-- Bank Transfer Fields -->
+              <form:SimpleForm editable="false" layout="ResponsiveGridLayout" visible="false" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" id="bankTransferFields">
+                <form:content>
+                  <core:Title text="Bank Transfer Details" />
+                  <Label text="Beneficiary Name" design="Bold" class="sapUiTinyMarginTop"/>
+                  <Input type="Text" required="true" liveChange="onchangeBeneficiaryName" placeholder="Enter Beneficiary Name" id="BeneficiaryName"></Input>
+
+                  <Label text="Bank Account Number" design="Bold" class="sapUiTinyMarginTop"/>
+                  <MaskInput mask="9999999999999999" required="true" id="bankAccount" placeholderSymbol="_" placeholder="Enter your bank account number" showClearIcon="true" />
+                  <Label text="Bank Name" required="true" design="Bold" class="sapUiTinyMarginTop"/>
+                  <Input id="bankName" placeholder="Enter the bank name" liveChange="onchangeBeneficiaryName"/>
+                </form:content>
+              </form:SimpleForm>
+
+              <!-- Credit Card Fields -->
+              <form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" id="creditCardFields" visible="false">
+                <form:content>
+                  <core:Title text="Credit Card Details" />
+                  <Label text=" Cardholder's Name" design="Bold" class="sapUiTinyMarginTop"/>
+                  <Input type="Text" id="CardHolderName" required="true" placeholder="Enter Card Holder Name" liveChange="onchangeBeneficiaryName"></Input>
+                  <Label text="Card Number" design="Bold" class="sapUiTinyMarginTop"/>
+                  <MaskInput mask="9999-9999-9999-9999" required="true" id="creditCardNumber" placeholderSymbol="_" placeholder="Enter your card number" showClearIcon="true" />
+                  <Label text="Expiration Date (MM/YYYY)" design="Bold" class="sapUiTinyMarginTop"/>
+                  <!-- <Input id="creditCardExpiry" placeholder="MM/YY" type="Text"/> -->
+                  <DatePicker id="DP8" required="true" placeholder="e.g. 12/2024" change="handleChange" showFooter="true" displayFormat="MM-yyyy"/>
+                  <Label text="CVV" design="Bold" class="sapUiTinyMarginTop"/>
+                  <MaskInput mask="999" required="true" id="creditCardCVV" placeholderSymbol="_" placeholder="Enter 3 Digit Security Number" showClearIcon="true" />
+
+                </form:content>
+              </form:SimpleForm>
+
+              <!-- Cash on Delivery Fields -->
+              <form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false" id="cashOnDeliveryFields" visible="false">
+                <form:content>
+                  <core:Title text="Cash On Delivery Details" />
+                  
+                  <Text text="Please confirm your delivery address and contact details for cash on delivery." />
+                </form:content>
+              </form:SimpleForm>
+            <!-- </content>
+          </Panel> -->
+
+        </WizardStep>
+
+
+        <WizardStep title="Invoice Address">
+           <form:SimpleForm editable="false" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1" singleContainerFullSize="false">
+            <form:content>
+              
+              <!-- Recipient Name (Optional) -->
+              <Label design="Bold" text="Recipient Name" class="sapUiTinyMarginTop"/>
+              <Input id="recipientName" required="true" placeholder="Enter recipient's name" value="{cartDataList>/recipientName}" liveChange="onchangeBeneficiaryName"/>
+              
+              <!-- Street Address (Required) -->
+              <Label design="Bold" text="Street Address" class="sapUiTinyMarginTop"/>
+              <Input id="streetAddress" required="true" placeholder="Enter your street address" value="{cartDataList>/streetAddress}" />
+              
+              <!-- City (Required) -->
+              <Label design="Bold" text="City" class="sapUiTinyMarginTop"/>
+              <Input id="city" required="true" liveChange="onchangeBeneficiaryName" placeholder="Enter your city" value="{cartDataList>/city}" />
+              
+              <!-- State/Province (Optional, depending on country) -->
+              <Label design="Bold" text="State/Province" class="sapUiTinyMarginTop"/>
+              <Input id="state" required="true" placeholder="Enter your state or province" value="{cartDataList>/state}" />
+              
+              <!-- Postal/ZIP Code (Required) -->
+              <Label design="Bold" text="Postal Code" class="sapUiTinyMarginTop"/>
+              <MaskInput id="postalCode" required="true" mask="999999" placeholder="Enter postal code" value="{cartDataList>/postalCode}" showClearIcon="true" />
+              
+              <!-- Country (Required) -->
+              <Label design="Bold" text="Country" class="sapUiTinyMarginTop"/>
+              <ComboBox id="country" required="true" selectedKey="{cartDataList>/country}" placeholder="Select your country">
+                <items>
+                  <core:Item key="US" text="United States" />
+                  <core:Item key="DE" text="Germany" />
+                  <core:Item key="IN" text="India" />
+                  <!-- Add other countries as needed -->
+                </items>
+              </ComboBox>
+
+              <!-- Phone Number (Optional) -->
+              <Label design="Bold" text="Phone Number" class="sapUiTinyMarginTop"/>
+              <MaskInput id="phone" mask="+99-9999999999" required="true" placeholder="Enter your phone number" value="{cartDataList>/phone}" showClearIcon="true" />
+
+              <!-- Additional Instructions (Optional) -->
+              <Label design="Bold" text="Additional Delivery Instructions" class="sapUiTinyMarginTop"/>
+              <TextArea id="additionalInstructions"  placeholder="Enter any delivery instructions" value="{cartDataList>/additionalInstructions}" rows="3" />
+            </form:content>
+          </form:SimpleForm>
+
+        </WizardStep>
+
+
+
+
+      </Wizard>
+    </content>
+
+    <footer>
+      <Bar>
+        <contentRight>
+          <Button text="Previous Step" press="onPreviousButtonPress" id="onBackButtonPress" visible="false"/>
+          <Button text="Next Step" type="Emphasized" visible="true" press="onNextButtonPress" id="nextButton" enabled="true"/>
+          <Button text="Submit" type="Success" press="onpresssucess" id="SubmitButton" enabled="false"/>
+        </contentRight>
+      </Bar>
+
+    </footer>
+
+
+
+
+  </Page>
+</mvc:View>

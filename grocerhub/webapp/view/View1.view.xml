@@ -1,0 +1,392 @@
+<mvc:View xmlns:footerbar="sap.ushell.ui.footerbar"
+  xmlns:cards="sap.f.cards"
+  xmlns:core="sap.ui.core"
+  xmlns:uxap="sap.uxap"
+  xmlns:f="sap.f" controllerName="grocerhub.controller.View1"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:l="sap.ui.layout"
+  xmlns:lf="sap.ui.layout.form"
+  xmlns="sap.m">
+  <Page id="page" title="{i18n>title}">
+    <headerContent>
+      <Toolbar>
+        <ToolbarSpacer/>
+        <core:Icon src="sap-icon://action-settings" press="onPressSetting" hoverColor="blue" size="25px"></core:Icon>
+        <!-- <Button icon="sap-icon://action-settings" press="onPressSetting" type="Emphasized"></Button> -->
+        <Avatar src="" displaySize="XS" displayShape="Circle" showBorder="true" press="onPressProfileAvatar"/>
+      </Toolbar>
+
+    </headerContent>
+    <content>
+      <f:FlexibleColumnLayout id="FlexibleColumnLayout" layout="TwoColumnsMidExpanded" columnResize="oncolumnResize">
+        <f:beginColumnPages>
+
+          <NavContainer id="NavContainer" >
+            <pages>
+              <Page id="MasterPage1" showHeader="false" showNavButton="true" navButtonPress="onpressmaster1">
+                <Toolbar>
+                  <SearchField placeholder="search" class="sapUiTinyMarginEnd" search="onSearchProduct" showSearchButton="true"></SearchField>
+                </Toolbar>
+                <List id="ShortProductList" items="{category>/Categories}">
+                  <items>
+                    <StandardListItem title="{category>name}" counter="3" type="Navigation" press="onItemPress"/>
+                  </items>
+                </List>
+              </Page>
+
+              <Page id="MasterPage2" showFooter="true" showHeader="false" floatingFooter="true">
+                <List id="ObjectList" headerText="Product Details" items="{objectlistdata>/products}">
+                  <items>
+                    <!-- <ObjectListItem title="{objectlistdata>/}" number="price" numberUnit="₹" intro="category" icon="{category>icon}" type="Active"/> -->
+                    <ObjectListItem title="{objectlistdata>name}" number="{objectlistdata>price}" numberUnit="USD" intro="{objectlistdata>category}" icon="{objectlistdata>icon}" type="Active" press="OnItemPressObject">
+
+                      <!-- Additional content for better clarification -->
+                      <attributes>
+                        <ObjectAttribute text="{objectlistdata>category}" />
+                        <ObjectAttribute text="{objectlistdata>description}" />
+                      </attributes>
+
+                      <!-- Price and Rating (use RatingIndicator for rating) -->
+                      <firstStatus>
+                        <ObjectStatus text="Price" state="None" />
+                      </firstStatus>
+
+                      <!-- Rating -->
+                      <secondStatus>
+                        <ObjectStatus text="Rating" state="Success" />
+                      </secondStatus>
+                    </ObjectListItem>
+                  </items>
+                </List>
+                <footer>
+                  <Bar>
+                    <contentLeft>
+                      <Button id="navBackButton" press="onpressmaster1" icon="sap-icon://arrow-left" type="Emphasized"></Button>
+                    </contentLeft>
+                  </Bar>
+
+                </footer>
+
+
+              </Page>
+
+
+            </pages>
+          </NavContainer>
+        </f:beginColumnPages>
+        <f:midColumnPages>
+          <NavContainer id="navContainerMid">
+            <pages>
+              <Page id="PageMid1" title="Welcome to the GrocerHub">
+                <headerContent >
+                  <Toolbar>
+                    <ToolbarSpacer/>
+                    <!-- <Button icon="sap-icon://cart" press="onPressCart" type="Transparent"></Button> -->
+                    <ToggleButton icon="sap-icon://cart" press="onPressCart" type="Emphasized" id="onpresscartid">
+                      <customData>
+                        <BadgeCustomData key="badge" value="" id="badge"/>
+                      </customData>
+                    </ToggleButton>
+                  </Toolbar>
+                </headerContent>
+                <Carousel id="autoScrollCarousel" ariaLabelledBy="carouselTitle" width="100%" showPageIndicator="false" loop="true" height="50%">
+                  <Image src="Images/tea.jpg" alt="Picture of tea product" />
+                  <Image src="Images/liquidwash.jpg" alt="Picture of liquid wash product" />
+                  <Image src="Images/shampoo.jpg" alt="Picture of shampoo advertisement" />
+                  <Image src="Images/soap.jpg" alt="Picture of soap product" />
+                  <Image src="Images/washtiles.jpg" alt="Picture of tile cleaning product" />
+                </Carousel>
+
+
+                <Toolbar>
+                  <Bar>
+                    <contentLeft>
+                      <Title text="Best Sellers"></Title>
+                    </contentLeft>
+                  </Bar>
+                </Toolbar>
+                <Carousel ariaLabelledBy="carouselTitle" height="auto" width="100%" arrowsPlacement="Content" backgroundDesign="Transparent" showPageIndicator="false" pages="{BestSeller>/products}">
+                  <customLayout>
+                    <CarouselLayout visiblePagesCount="{BestSeller>/visiblePages}" />
+                  </customLayout>
+
+                  <Panel class="clickable-card sapUiSmallMarginTop " backgroundDesign="Transparent" headerText="{BestSeller>offer}">
+                    <content>
+                      <VBox alignItems="Center" class="sapUiContentPadding">
+                        <!-- Product Image -->
+                        <Image src="{BestSeller>Carouselimage}" alt="{BestSeller>name}" width="100%" height="auto" class="sapUiTinyMarginBottom" />
+                        <!-- <Avatar src="{BestSeller>Carouselimage}" displaySize="XL" press="wdsds" displayShape="Square"></Avatar> -->
+
+                        <!-- Product Name -->
+                        <Title text="{BestSeller>name}" level="H1" class="sapUiMediumMarginBottom sapUiResponsiveMargin" />
+
+                        <!-- Product Price -->
+                        <!-- <HBox width="80%" justifyContent="Center" alignItems="Center" class="sapUiMediumMarginBottom"> -->
+                        <!-- <Label text="Price" class="sapUiTinyMarginEnd" /> -->
+                        <ObjectNumber number="{BestSeller>price}" unit="USD" emphasized="true" class="sapUiMediumMarginBottom"/>
+                        <!-- </HBox> -->
+                        <!-- Category and Offer (Vertical alignment) -->
+                        <VBox width="80%" justifyContent="Start" alignItems="Start" class="sapUiSmallMarginBottom">
+                          <!-- <ObjectStatus title="Category" text="{BestSeller>category}" /> -->
+                          <Label text="Category:"></Label>
+                          <Text text="{BestSeller>category}"></Text>
+                          <!-- <ObjectStatus title="Offer" text="{BestSeller>offer}" state="Success" /> -->
+                        </VBox>
+
+                        <!-- Rating (Using RatingIndicator instead of ObjectNumber) -->
+                        <VBox alignItems="Center">
+                          <Text text="Rating:" />
+                          <RatingIndicator value="{BestSeller>rating}" maxValue="5" />
+                        </VBox>
+                        <!-- Action Buttons -->
+                        <HBox width="100%" justifyContent="SpaceBetween">
+                          <Button text="View Details" type="Transparent" press="onViewProductDetailPress" class="sapUiMediumMarginEnd" />
+                          <Button text="Add to Cart" type="Emphasized" press="onAddToCartPress" enabled="{BestSeller>visible}"/>
+                        </HBox>
+                      </VBox>
+                    </content>
+                  </Panel>
+                </Carousel>
+
+
+                <Toolbar>
+                  <Bar>
+                    <contentLeft>
+                      <Title text="Top Offers"></Title>
+                    </contentLeft>
+                  </Bar>
+                </Toolbar>
+
+                <Carousel ariaLabelledBy="offersCarousel" height="auto" width="100%" arrowsPlacement="Content" backgroundDesign="Transparent" showPageIndicator="false">
+                  <customLayout>
+                    <CarouselLayout visiblePagesCount="{BestSeller>/visiblePages}" />
+                  </customLayout>
+
+                  <!-- Juice Offer -->
+                  <Panel class="clickable-card sapUiSmallMarginTop" backgroundDesign="Transparent" headerText="Juice Offer">
+                    <content>
+                      <VBox alignItems="Center" class="sapUiContentPadding">
+                        <Image src="Images/juiceoffer.jpg" alt="Juice Offer" width="100%" height="auto" class="sapUiTinyMarginBottom" />
+                        <Title text="Juice Offer" level="H2" class="sapUiMediumMarginBottom sapUiResponsiveMargin" />
+                        <Text text="Enjoy refreshing juices at a 20% discount. Perfect for any season!" class="sapUiMediumMarginBottom" />
+                        <HBox width="100%" justifyContent="SpaceBetween">
+                          <Button text="View Details" type="Emphasized" press="onViewOfferDetailPress" class="sapUiMediumMarginEnd" />
+                          <Button text="Shop Now" type="Transparent" press="onShopNowPress" />
+                        </HBox>
+                      </VBox>
+                    </content>
+                  </Panel>
+
+                  <!-- Dairy Offer -->
+                  <Panel class="clickable-card sapUiSmallMarginTop" backgroundDesign="Transparent" headerText="Dairy Offer">
+                    <content>
+                      <VBox alignItems="Center" class="sapUiContentPadding">
+                        <Image src="Images/dairyoffer.jpg" alt="Dairy Offer" width="100%" height="auto" class="sapUiTinyMarginBottom" />
+                        <Title text="Dairy Offer" level="H2" class="sapUiMediumMarginBottom sapUiResponsiveMargin" />
+                        <Text text="Get the freshest dairy products with an exclusive 15% off. Healthy and delicious!" class="sapUiMediumMarginBottom" />
+                        <HBox width="100%" justifyContent="SpaceBetween">
+                          <Button text="View Details" type="Emphasized" press="onViewOfferDetailPress" class="sapUiMediumMarginEnd" />
+                          <Button text="Shop Now" type="Transparent" press="onShopNowPress" />
+                        </HBox>
+                      </VBox>
+                    </content>
+                  </Panel>
+
+                  <!-- Bakery Offer -->
+                  <Panel class="clickable-card sapUiSmallMarginTop" backgroundDesign="Transparent" headerText="Bakery Offer">
+                    <content>
+                      <VBox alignItems="Center" class="sapUiContentPadding">
+                        <Image src="Images/bakeryoffer.jpg" alt="Bakery Offer" width="100%" height="auto" class="sapUiTinyMarginBottom" />
+                        <Title text="Bakery Offer" level="H2" class="sapUiMediumMarginBottom sapUiResponsiveMargin" />
+                        <Text text="Savor freshly baked goods with a sweet 10% discount. Treat yourself today!" class="sapUiMediumMarginBottom" />
+                        <HBox width="100%" justifyContent="SpaceBetween">
+                          <Button text="View Details" type="Emphasized" press="onViewOfferDetailPress" class="sapUiMediumMarginEnd" />
+                          <Button text="Shop Now" type="Transparent" press="onShopNowPress" />
+                        </HBox>
+                      </VBox>
+                    </content>
+                  </Panel>
+
+                  <!-- Fruits Offer -->
+                  <Panel class="clickable-card sapUiSmallMarginTop" backgroundDesign="Transparent" headerText="Fruits Offer">
+                    <content>
+                      <VBox alignItems="Center" class="sapUiContentPadding">
+                        <Image src="Images/fruitsoffer.jpg" alt="Fruits Offer" width="100%" height="auto" class="sapUiTinyMarginBottom" />
+                        <Title text="Fruits Offer" level="H2" class="sapUiMediumMarginBottom sapUiResponsiveMargin" />
+                        <Text text="Stock up on seasonal fruits with a juicy 25% discount. Freshness guaranteed!" class="sapUiMediumMarginBottom" />
+                        <HBox width="100%" justifyContent="SpaceBetween">
+                          <Button text="View Details" type="Emphasized" press="onViewOfferDetailPress" class="sapUiMediumMarginEnd" />
+                          <Button text="Shop Now" type="Transparent" press="onShopNowPress" />
+                        </HBox>
+                      </VBox>
+                    </content>
+                  </Panel>
+                </Carousel>
+
+
+              </Page>
+
+
+              <Page id="PageMid2" showHeader="false">
+                <content>
+                  <!-- Product Details Section -->
+                  <ObjectHeader binding="{itemsData>/}" title="{itemsData>/name}" number="{
+      parts: [{ path: 'itemsData>/price' }, { path: 'itemsData>/unit' }],
+      type: 'sap.ui.model.type.Currency',
+      formatOptions: { showMeasure: false }
+  
+    }" numberUnit="USD" backgroundDesign="Solid">
+
+
+                    <!-- //numberUnit="{itemsData>/unit}"  -->
+
+                    <statuses>
+                      <ObjectStatus text="In Stock: {itemsData>/stock}" state="Success" />
+                      <ObjectStatus text="Rating: {itemsData>/rating}" state="None" />
+                    </statuses>
+                    <ObjectAttribute text="Category: {itemsData>/category}" />
+                    <ObjectAttribute text="Description: {itemsData>/description}" />
+
+                  </ObjectHeader>
+                  <FlexBox justifyContent="Center" alignItems="Center" wrap="Wrap" class="sapUiSmallMargin">
+                    <!-- <Carousel id="productCarousel" showPageIndicator="false"> -->
+                    <!-- pages="{itemsData>/Image}" -->
+                    <!-- <customLayout>
+                        <CarouselLayout visiblePagesCount="1" />
+                      </customLayout>
+                      <Image src="{itemsData>/CarouselImage}" decorative="true" densityAware="true" />
+                    </Carousel> -->
+
+                    <Image src="{itemsData>/Carouselimage}" decorative="false" width="300px" densityAware="false">
+                      <detailBox>
+                        <LightBox>
+                          <LightBoxItem imageSrc="{itemsData>/Carouselimage}" class="sapUiSmallMargin" alt="{itemsData>/name}" title="{itemsData>/name}" subtitle="{itemsData>/description}" />
+                        </LightBox>
+                      </detailBox>
+                    </Image>
+                  </FlexBox>
+
+                  <FlexBox justifyContent="Center" alignItems="Center" wrap="Wrap">
+                    <f:AvatarGroup items="{itemsData>/image}" avatarCustomDisplaySize="1rem" avatarDisplaySize="M" groupType="Individual" press="onpresimageforproduct">
+                      <f:items>
+                        <f:AvatarGroupItem src="{itemsData>image}"></f:AvatarGroupItem>
+                        <!-- <f:AvatarGroupItem src="{itemsData>Image}"></f:AvatarGroupItem>
+                        <f:AvatarGroupItem src="{itemsData>Image}"></f:AvatarGroupItem>
+                        <f:AvatarGroupItem src="{itemsData>Image}"></f:AvatarGroupItem> -->
+                      </f:items>
+                    </f:AvatarGroup>
+                  </FlexBox>
+                </content>
+                <footer>
+                  <OverflowToolbar>
+                  
+                        <Button press="onPressNavigatePage1" type="Emphasized" icon="sap-icon://arrow-left" />
+                     <ToolbarSpacer ></ToolbarSpacer>
+                        <StepInput value="{itemsData>/quantity}" visible="{itemsData>/visiblestepInput}" min="1" width="10rem" change=".onQuantityChangeinproductDetails" step="1" tooltip="Select quantity" />
+                        <Button text="Add to Cart" press="onpressproductgocart" type="Emphasized" visible="{itemsData>/visible}" />
+                        <Button text="Remove From cart" press="onpressproductreemovecart" type="Reject" visible="{itemsData>/visiblestepInput}"/>
+                        <Button text="Buy Now" press="onBuyNowPress" visible="{itemsData>/visiblebuybuttontype}" type="Accept" />
+                        <Button text="Share" press="onSharePress" type="Transparent" />
+                     
+                  </OverflowToolbar>
+                </footer>
+              </Page>
+
+
+
+            </pages>
+
+          </NavContainer>
+        </f:midColumnPages>
+        <f:endColumnPages>
+          <NavContainer>
+            <pages>
+              <Page title="cart">
+                <headerContent>
+                  <Button press="onclosecart" icon="sap-icon://decline"></Button>
+                </headerContent>
+
+                <content>
+                  <List items="{cartData>/cartdata}" showSeparators="All">
+                    <noData>
+                      <Title text="No items in the cart" class="sapUiTinyMargin" />
+                    </noData>
+                    <CustomListItem>
+                      <FlexBox justifyContent="SpaceBetween" alignItems="Center" wrap="Wrap" class="sapUiSmallMargin">
+                        <!-- Left Section: Product Details -->
+                        <FlexBox direction="Column" alignItems="Start">
+                          <Avatar src="{cartData>Carouselimage}" displayShape="Square" displaySize="L" class="sapUiTinyMarginBottom" press="onrpessitemspictureincart"/>
+                          <Title text="{cartData>name}" class="sapMTextBold sapUiTinyMarginBottom" />
+                          <Title  text="{cartData>category}" class="sapMTextBold sapUiTinyMarginBottom" />
+                          <Title text="Price: ${cartData>price}" class="sapMTextLarge sapUiTinyMarginBottom" />
+                          <Title text="{cartData>offer}" class="sapUiTinyMarginTop sapMTextSuccess" />
+                        </FlexBox>
+
+                        <!-- Right Section: Actions -->
+                        <FlexBox direction="Column" alignItems="End">
+                          <Button icon="sap-icon://delete" type="Reject" press="onDeleteCartItem" class="sapUiSmallMarginBottom"></Button>
+                          <Label text="Quantity" design="Bold"></Label>
+                          <StepInput value="{cartData>quantity}" min="1" change=".onQuantityChange" class="sapUiTinyMarginBottom" step="1" width="100px" tooltip="Select quantity" />
+                          <VBox>
+                            <Label text="Total Price:" class="sapUiTinyMarginEnd" design="Bold"></Label>
+                            <!-- <ObjectNumber number="{cartData>totalPrice}" id="totalPrice" unit="USD" class="sapMTextBold sapUiTinyMarginBottom"></ObjectNumber> -->
+                            <Title text="{cartData>totalPrice} USD" id="totalPrice" level="H1" class="sapMTextBold sapUiTinyMarginBottom"></Title>
+                          </VBox>
+                          <VBox>
+                            <Label text="Final Price:" class="sapUiTinyMarginEnd" design="Bold"></Label>
+                            <!-- <ObjectNumber number="{cartData>Finalprice}" id="FinalPrice" unit="USD" class="sapMTextBold sapUiTinyMarginBottom"></ObjectNumber> -->
+                            <Title text="{cartData>finalPrice} USD" id="FinalPrice" level="H1" class="sapMTextBold"></Title>
+                          </VBox>
+
+                        </FlexBox>
+
+                      </FlexBox>
+                    </CustomListItem>
+                  </List>
+                </content>
+                <lf:SimpleForm id="SimpleFormDisplay480_12120Dual" editable="false" layout="ResponsiveGridLayout" title="Cart Summary" backgroundDesign="Translucent" class="sapUiSmallMarginTop sapUiSmallMarginBegin sapUiMediumMarginEnd" labelSpanXL="4" labelSpanL="4" labelSpanM="12" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false">
+                  <lf:content>
+                    <Label text="Subtotal" design="Bold" class="sapUiLargeMarginEnd"/>
+                    <Text text="{SummaryOfShopping>/Subtotal}  USD" class="sapUiLargeMarginEnd" />
+
+                    <Label text="Shipping" design="Bold"/>
+                    <Text text="{SummaryOfShopping>/Shipping} USD" class="sapMTextBold" />
+
+                    <Label text="Tax (5%)" design="Bold"/>
+                    <Text text="{SummaryOfShopping>/taxPrice} USD" class="sapMTextBold" />
+
+                    <Label text="GrandTotal" design="Bold"/>
+                    <Text text="{SummaryOfShopping>/GrandTotal} USD" class="sapMTextBold" />
+                  </lf:content>
+                </lf:SimpleForm>
+
+                <!-- Checkout and Continue Shopping Buttons -->
+                <footer>
+                <OverflowToolbar>
+
+                    <Title text="Total Price:{SummaryOfShopping>/GrandTotal} USD"></Title>
+                    <ToolbarSpacer ></ToolbarSpacer>
+                    <Button text="Continue Shopping" type="Default" press="onclosecart" class="sapUiTinyMarginStart" />
+                    <Button text="Proceed to Checkout" type="Emphasized" press="onProceedToCheckout" class="sapUiTinyMarginStart" />
+
+
+                  </OverflowToolbar>
+
+                 
+
+                </footer>
+
+
+              </Page>
+
+            </pages>
+          </NavContainer>
+
+        </f:endColumnPages>
+
+      </f:FlexibleColumnLayout>
+
+
+    </content>
+  </Page>
+</mvc:View>

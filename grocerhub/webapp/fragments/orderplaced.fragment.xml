@@ -1,0 +1,25 @@
+<core:FragmentDefinition xmlns:layout="sap.ui.layout" xmlns="sap.m" xmlns:core="sap.ui.core">
+  <Dialog id="orderPlacedDialog" title="Order Placed" afterClose="onDialogClose"  class="sapUiResponsivePadding">
+    <layout:BlockLayout class="sapUiResponsiveMargin sapUiShadow sapUiContentBackgroundColor">
+      <layout:BlockLayoutRow>
+        <layout:BlockLayoutCell backgroundColorSet="ColorSet5" backgroundColorShade="ShadeA" title="🎉 Success!" titleAlignment="Center" class="sapUiSmallMargin">
+          <VBox alignItems="Center" justifyContent="Center" class="sapUiLargePadding">
+            <core:Icon src="sap-icon://sys-enter-2" size="6rem" color="green" class="sapUiTinyMarginBottom" />
+            <Text text="🎉 Congratulations! Your order has been successfully placed." wrapping="true" textAlign="Center" class="sapUiTinyMarginTopBottom sapUiLargeFontSize sapUiBoldText sapUiSuccessText" />
+            <Text text="📩 You will receive a confirmation email shortly." wrapping="true" textAlign="Center" class="sapUiTinyMarginTopBottom sapUiSmallFontSize sapUiLightTextColor" />
+          </VBox>
+        </layout:BlockLayoutCell>
+      </layout:BlockLayoutRow>
+      <layout:BlockLayoutRow>
+        <layout:BlockLayoutCell backgroundColorSet="ColorSet3" backgroundColorShade="ShadeB">
+          <VBox alignItems="Center" justifyContent="Center" class="sapUiMediumPadding">
+            <Text text="📞 Need assistance? Contact our support team anytime." wrapping="true" textAlign="Center" class="sapUiSmallFontSize sapUiMediumTextColor sapUiTinyMarginTopBottom" />
+          </VBox>
+        </layout:BlockLayoutCell>
+      </layout:BlockLayoutRow>
+    </layout:BlockLayout>
+    <endButton>
+      <Button text="OK" press="onDialogClose" type="Emphasized" class="sapUiTinyMargin sapUiAccentBackgroundColor sapUiLargeFontSize" />
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>

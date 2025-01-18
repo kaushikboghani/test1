@@ -1,0 +1,20 @@
+.clickable-card {
+    cursor: pointer;
+    border: 1px solid #ddd; /* Maintains a subtle border */
+    border-radius: 8px; /* Adds rounded corners */
+    transition: box-shadow 0.3s ease, transform 0.2s ease; /* Smooth hover animations */
+    background-color: #fff; /* Clean white background */
+    overflow: hidden; /* Ensures content stays within bounds */
+}
+
+.clickable-card:hover {
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow for hover */
+    transform: translateY(-4px); /* Slight lift effect on hover */
+}
+
+.sapUiFormTitle {
+    text-decoration: underline;
+}
+.sapUiFormTitle .sapUiFormTitleH5{
+    text-decoration: underline;
+}
