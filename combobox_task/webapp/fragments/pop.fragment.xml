@@ -1,0 +1,17 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Popover id="helloPopover" contentWidth="20rem" title="Popover Title" placement="Bottom" showArrow="false" showHeader="false">
+        <content>
+            <VBox>
+            <CheckBox text="Select All" id="selectAll" class="sapUiTinyMarginBegin" textAlign="Begin" select="onSelectAll"/>
+                <List mode="MultiSelect" id="listId" items="{employeesData>/employeesDetails}" selectionChange="onSelectListData">
+                    <items>
+                        <!-- <ObjectListItem title="{employeesData>name}" ></ObjectListItem> -->
+                        <!-- <ColumnListItem ></ColumnListItem> -->
+                        <StandardListItem title="{employeesData>name}" selected="false"></StandardListItem>
+                     </items>
+                </List>
+            </VBox>
+        </content>
+    </Popover>
+</core:FragmentDefinition>

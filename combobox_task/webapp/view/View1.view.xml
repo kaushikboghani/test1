@@ -1,0 +1,32 @@
+<mvc:View xmlns:core="sap.ui.core" controllerName="comboboxtask.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+
+<content>
+        <VBox justifyContent="Center">
+                    <!-- <Input   id="inputid"  showValueHelp="true" liveChange="onInputValueChange" class="sapUiLargeMargin" width="20rem" valueHelpRequest="onpressvaluehelpinput"></Input> -->
+
+            <MultiInput tokenUpdate="onTokenRemove"   showSuggestion="true"  id="inputid"  showValueHelp="true" liveChange="onInputValueChange" class="sapUiLargeMargin" width="20rem" valueHelpRequest="onpressvaluehelpinput">
+          
+            <tokens>
+            </tokens>
+            </MultiInput>
+            
+        </VBox>
+
+    <!-- <ComboBox id="comboBoxId"    width="20rem" items="{employeesData>/employeesDetails}" selectionChange="onComboBoxSelectionChange">
+   <SelectList>
+   <items> -->
+        <!-- <core:Item key="SelectAll" text="Select All" /> -->
+        <!-- <core:Item key="{employeesData>/name}" text="{employeesData>/name}" />
+        </items>
+   </SelectList>
+ 
+</ComboBox> -->
+
+        </content> 
+
+
+    </Page>
+</mvc:View>
